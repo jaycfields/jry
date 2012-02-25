@@ -1,6 +1,5 @@
 (ns jry.test.core
-  (:use [jry.core])
-  (:use [clojure.test]))
+  (:use jry.core expectations))
 
-(deftest replace-me ;; FIXME: write
-  (is false "No tests have been written."))
+(expect fn? (% identity 1))
+(expect 1 ((% identity 1)))
