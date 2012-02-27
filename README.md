@@ -2,8 +2,10 @@
 
 > another conjrib
 
-## Installing
 ----------
+
+## Installing
+
 
 The easiest way to use expectations in your own projects is via
 [Leiningen](http://github.com/technomancy/leiningen). Add the
