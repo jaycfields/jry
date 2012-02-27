@@ -22,7 +22,7 @@ To build expectations from source, run the following commands:
 
 composing functions
     
-    ;;; a shorthand for partial
+    ;;; % as a shorthand for partial
     ((% identity 1)) => 1
 
 ## License
