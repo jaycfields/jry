@@ -75,3 +75,6 @@
 
 (defn key-by [f coll]
   (reduce (fn [r e] (assoc r (f e) e)) {} coll))
+
+(defn xrelify [m kk vk]
+  (map (fn [[k v]] (hash-map kk k vk v)) m))

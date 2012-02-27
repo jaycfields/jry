@@ -48,3 +48,6 @@
 
 (expect {1 {:a 1 :b 1} 2 {:a 2 :b 2} 3 {:a 3 :b 3}}
   (key-by :a [{:a 1 :b 1} {:a 2 :b 2} {:a 3 :b 3}]))
+
+(expect [{:x 1 :y 2} {:x 3 :y 4}]
+  (xrelify {1 2 3 4} :x :y))
