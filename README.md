@@ -22,8 +22,21 @@ To build expectations from source, run the following commands:
 
 composing functions
     
-    ;;; % as a shorthand for partial
+    ; % as a shorthand for partial
     ((% identity 1)) => 1
+
+interop related functions
+
+    ; truthy converts truthy values to true and falsey values to false
+    ; good for functions that need to return true or false explicitly
+    (truthy? "BRN") => true
+    (truthy? true)  => true
+    (truthy? nil)   => false
+
+    ; falsey is the complement of truthy
+    (falsey? "BRN") => false
+    (falsey? true)  => false
+    (falsey? nil)   => true
 
 ## License
 
