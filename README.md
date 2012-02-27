@@ -45,6 +45,40 @@ interop related functions
               :year .getYear
               :day .getDate) => {:month 0 :year 2012 :day 31}
 
+collections
+   
+    ; every is like every?, but it returns the entire list if
+    ; everything is truthy; else, nil
+    (every identity [1 2 3]) => [1 2 3]
+    (every identity [1 false]) => nil
+
+maps
+
+    ; submap returns true if a map is (recursively) a submap
+    (submap {:a 1 :b {:c 2}} {:a 1 :b {:c 2 :d 3} :e 4}) => true
+    (submap {:a 1 :b {:c 2}} {:a "9" :b {:c 2 :d 3} :e 4}) => false
+    (submap {:a 1 :b {:c 2}} {:a 1 :b {:c "9" :d 3} :e 4}) => false
+
+    ; flatten-keys denormalizes keys.
+    (flatten-keys {:a {:b 1 :e 3} :c {:d 2}}) => {[:a :b] 1 [:a :e] 3 [:c :d] 2}
+    (flatten-keys {:a {:z nil :b 1 :e {:f 4 :g 5}}}) => {[:a :z] nil [:a :b] 1 [:a :e :f] 4 [:a :e :g] 5} 
+
+    ; update-values applies a function (and any additional args) to
+    ; each value in a map. 
+    (update-values {:b {:c :d :e :f} :h {:c :d :e :f}} dissoc :c) => {:b {:e :f} :h {:e :f}}
+
+    ; nth-values returns all values at or below a key depth
+    (nth-vals 2 {1 {2 3} 4 {5 6}}) => [3 6]
+    (nth-vals 2 {:a :a 1 {2 3} 4 {5 {6 7}}}) => [3 {6 7} :a]
+
+    ; key-by keys a new map from an xrel by applying a fn to each
+    ; element of an xrel
+    (key-by :a [{:a 1 :b 1} {:a 2 :b 2} {:a 3 :b 3}]) => {1 {:a 1 :b 1} 2 {:a 2 :b 2} 3 {:a 3 :b 3}}
+
+    ; xrelify converts a map into an xrel, mapping each k/v pair to a
+    ; k key and a v key
+    (xrelify {1 2 3 4} :x :y) => [{:x 1 :y 2} {:x 3 :y 4}]
+
 ## License
 
 Copyright (c) 2010, Jay Fields
