@@ -20,7 +20,10 @@ To build expectations from source, run the following commands:
 
 ## Examples
 
-
+composing functions
+    
+    ;;; a shorthand for partial
+    ((% identity 1)) => 1
 
 ## License
 
