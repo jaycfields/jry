@@ -38,6 +38,13 @@ interop related functions
     (falsey? true)  => false
     (falsey? nil)   => true
 
+    ; obj->map allows you to convert from a Java object to a map
+    ; without using reflection
+    (obj->map (java.util.Date. 2012 0 31)
+              :month .getMonth
+              :year .getYear
+              :day .getDate) => {:month 0 :year 2012 :day 31}
+
 ## License
 
 Copyright (c) 2010, Jay Fields
