@@ -1,6 +1,0 @@
-resource "jry.jar"
-
-config default
-  append CLASSPATH=@/jry.jar
-  append SOURCEPATH=@/jry.jar
-end
