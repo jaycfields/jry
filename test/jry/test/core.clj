@@ -40,6 +40,9 @@
 (expect {:b {:e :f} :h {:e :f}}
   (update-values {:b {:c :d :e :f} :h {:c :d :e :f}} dissoc :c))
 
+(expect {1 :a 2 :b}
+        (update-keys {2 :a 3 :b} - 1))
+
 (expect [3 6]
   (nth-vals 2 {1 {2 3} 4 {5 6}}))
 

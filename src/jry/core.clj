@@ -73,6 +73,9 @@
 (defn update-values [m f & args]
   (reduce (fn [r [k v]] (assoc r k (apply f v args))) {} m))
 
+(defn update-keys [m f & args]
+  (reduce (fn [r [k v]] (assoc r (apply f k args) v)) {} m))
+
 (defn key-by [f coll]
   (reduce (fn [r e] (assoc r (f e) e)) {} coll))
 
