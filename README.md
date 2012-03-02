@@ -83,6 +83,11 @@ maps
     ; k key and a v key
     (xrelify {1 2 3 4} :x :y) => [{:x 1 :y 2} {:x 3 :y 4}]
 
+    ; replace-values replaces the values of keys that exist in a map
+    ; (and ignores any replacement values that have keys that do not
+    ; exist in the original map)
+    (replace-values {:a 1 :b 2} {:b 3 :c 4}) => {:a 1 :b 3}
+    
 ## License
 
 Copyright (c) 2010, Jay Fields

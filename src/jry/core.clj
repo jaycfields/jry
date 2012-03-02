@@ -81,3 +81,11 @@
 
 (defn xrelify [m kk vk]
   (map (fn [[k v]] (hash-map kk k vk v)) m))
+
+(defn replace-values [m replacements]
+  (reduce
+   (fn [r [k v]]
+     (if (contains? m k)
+       (assoc m k v)
+       m))
+   m replacements))

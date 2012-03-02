@@ -54,3 +54,5 @@
 
 (expect [{:x 1 :y 2} {:x 3 :y 4}]
   (xrelify {1 2 3 4} :x :y))
+
+(expect {:a 1 :b 3} (replace-values {:a 1 :b 2} {:b 3 :c 4}))
