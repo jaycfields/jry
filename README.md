@@ -67,6 +67,10 @@ maps
     ; each value in a map. 
     (update-values {:b {:c :d :e :f} :h {:c :d :e :f}} dissoc :c) => {:b {:e :f} :h {:e :f}}
 
+    ; update-keys applies a function (and any additional args) to
+    ; each key in a map.
+    (update-keys {1 :a 2 :b} + 1) => {2 :a 3 :b}
+
     ; nth-values returns all values at or below a key depth
     (nth-vals 2 {1 {2 3} 4 {5 6}}) => [3 6]
     (nth-vals 2 {:a :a 1 {2 3} 4 {5 {6 7}}}) => [3 {6 7} :a]
