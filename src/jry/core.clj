@@ -85,7 +85,7 @@
 (defn replace-values [m replacements]
   (reduce
    (fn [r [k v]]
-     (if (contains? m k)
-       (assoc m k v)
-       m))
+     (if (contains? r k)
+       (assoc r k v)
+       r))
    m replacements))
