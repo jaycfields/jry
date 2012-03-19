@@ -1,4 +1,4 @@
-(defproject jry "1.0.5"
+(defproject jry "1.0.6"
   :description "general clojure functions"
   :jar-name "jry.jar"
   :dependencies [[org.clojure/clojure "1.3.0"]]
