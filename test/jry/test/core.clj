@@ -56,3 +56,7 @@
   (xrelify {1 2 3 4} :x :y))
 
 (expect {:a 1 :b 3} (replace-values {:a 1 :b 2} {:b 3 :c 4}))
+
+(expect 10 (parse-long "10"))
+
+(expect 2.1 (parse-double "2.1"))

@@ -89,3 +89,6 @@
        (assoc r k v)
        r))
    m replacements))
+
+(def parse-double #(Double/parseDouble %))
+(def parse-long #(Long/parseLong %))
