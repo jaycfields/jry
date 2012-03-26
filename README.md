@@ -44,6 +44,10 @@ interop related functions
               :month .getMonth
               :year .getYear
               :day .getDate) => {:month 0 :year 2012 :day 31}
+              
+    ; parse-double & parse-long are available, and helpful when used with high-order fns
+    (parse-double "2.1") => 2.1
+    (parse-long "2") => 2
 
 collections
    
