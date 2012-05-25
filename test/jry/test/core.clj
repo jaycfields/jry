@@ -18,6 +18,11 @@
 (expect true (falsey? nil))
 (expect true (falsey? false))
 
+(expect false (xor false false))
+(expect true (xor false true))
+(expect true (xor true false))
+(expect false (xor true true))
+
 (expect [1 2 3] (every identity [1 2 3]))
 (expect nil (every identity [1 2 nil]))
 
