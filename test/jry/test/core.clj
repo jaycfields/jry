@@ -18,6 +18,9 @@
 (expect true (falsey? nil))
 (expect true (falsey? false))
 
+(expect one? 1)
+(expect two? 2)
+
 (expect false (xor false false))
 (expect true (xor false true))
 (expect true (xor true false))

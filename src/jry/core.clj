@@ -95,3 +95,6 @@
 
 (def parse-double #(Double/parseDouble %))
 (def parse-long #(Long/parseLong %))
+
+(defn one? [x] (= 1 x))
+(defn two? [x] (= 2 x))
