@@ -11,7 +11,7 @@ The easiest way to use expectations in your own projects is via
 [Leiningen](http://github.com/technomancy/leiningen). Add the
 following dependency to your project.clj file:
 
-    [jry "1.0.0"]
+    [jry "1.0.10"]
 
 To build expectations from source, run the following commands:
 
