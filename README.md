@@ -24,6 +24,19 @@ composing functions
     
     ; % as a shorthand for partial
     ((% identity 1)) => 1
+    
+basic functions
+
+    ; exclusive or
+    (xor true false) => true
+    (xor true true) => false
+    (xor false false) => false
+    
+    ; one? & two?
+    (one? 1) => true
+    (one? 3) => false
+    (two? 2) => true
+    (two? 8) => false
 
 interop related functions
 
