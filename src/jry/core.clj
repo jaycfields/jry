@@ -8,6 +8,9 @@
 
 (def falsey? (complement truthy?))
 
+(defn xor [a b]
+  (and (or a b) (not (and a b))))
+
 (defn every [pred l]
   (when (every? pred l)
     l))
