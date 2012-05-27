@@ -71,7 +71,7 @@ collections
 
 maps
 
-    ; submap returns true if a map is (recursively) a submap
+    ; submap? returns true if a map is (recursively) a submap
     (submap? {:a 1 :b {:c 2}} {:a 1 :b {:c 2 :d 3} :e 4}) => true
     (submap? {:a 1 :b {:c 2}} {:a "9" :b {:c 2 :d 3} :e 4}) => false
     (submap? {:a 1 :b {:c 2}} {:a 1 :b {:c "9" :d 3} :e 4}) => false
