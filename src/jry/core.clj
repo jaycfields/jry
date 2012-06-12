@@ -15,11 +15,14 @@
   (when (every? pred l)
     l))
 
-(defn submap [sub super]
+(defn submap? [sub super]
   (->
     (clojure.data/diff sub super)
     last
     (= sub)))
+
+(defn p [& xs]
+  (apply println (map pr-str xs)))
 
 (defmacro returning [[the-symbol v] & forms]
   `(let [~the-symbol ~v]

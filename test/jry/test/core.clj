@@ -29,15 +29,18 @@
 (expect [1 2 3] (every identity [1 2 3]))
 (expect nil (every identity [1 2 nil]))
 
-(expect true? (submap {:a 1 :b {:c 2}} {:a 1 :b {:c 2 :d 3} :e 4}))
-(expect false? (submap {:a 1 :b {:c 2}} {:a "9" :b {:c 2 :d 3} :e 4}))
-(expect false? (submap {:a 1 :b {:c 2}} {:a 1 :b {:c "9" :d 3} :e 4}))
+(expect true? (submap? {:a 1 :b {:c 2}} {:a 1 :b {:c 2 :d 3} :e 4}))
+(expect false? (submap? {:a 1 :b {:c 2}} {:a "9" :b {:c 2 :d 3} :e 4}))
+(expect false? (submap? {:a 1 :b {:c 2}} {:a 1 :b {:c "9" :d 3} :e 4}))
 
 (expect {:month 0 :year 2012 :day 31}
   (obj->map (java.util.Date. 2012 0 31)
     :month .getMonth
     :year .getYear
     :day .getDate))
+
+(expect "\"i said\" {:foo \"bar\"}\n"
+        (with-out-str (p "i said" {:foo "bar"})))
 
 (expect {[:a :b] 1 [:a :e] 3 [:c :d] 2} (flatten-keys {:a {:b 1 :e 3} :c {:d 2}}))
 (expect {[:a :z] nil [:a :b] 1 [:a :e :f] 4 [:a :e :g] 5}
