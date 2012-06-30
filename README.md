@@ -1,6 +1,6 @@
 # jry
 
-> another conjrib
+> another conjrib, pronounced 'dry'
 
 ----------
 
