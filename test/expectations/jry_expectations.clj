@@ -1,10 +1,8 @@
-(ns jry.test.core
-  (:use jry.core expectations))
+(ns expectations.jry-expectations
+  (:use jry expectations))
 
 (expect fn? (% identity 1))
 (expect 1 ((% identity 1)))
-
-(expect 1 (returning [x 1] (* 2 x) (* 4 x)))
 
 (expect true (truthy? "BRN"))
 (expect true (truthy? true))
@@ -49,7 +47,7 @@
 (expect {} (flatten-keys nil))
 
 (expect {:b {:e :f} :h {:e :f}}
-  (update-values {:b {:c :d :e :f} :h {:c :d :e :f}} dissoc :c))
+  (update-vals {:b {:c :d :e :f} :h {:c :d :e :f}} dissoc :c))
 
 (expect {1 :a 2 :b}
         (update-keys {2 :a 3 :b} - 1))
@@ -60,14 +58,11 @@
 (expect [3 {6 7} :a]
   (nth-vals 2 {:a :a 1 {2 3} 4 {5 {6 7}}}))
 
-(expect {1 {:a 1 :b 1} 2 {:a 2 :b 2} 3 {:a 3 :b 3}}
-  (key-by :a [{:a 1 :b 1} {:a 2 :b 2} {:a 3 :b 3}]))
-
-(expect [{:x 1 :y 2} {:x 3 :y 4}]
-  (xrelify {1 2 3 4} :x :y))
-
-(expect {:a 1 :b 3} (replace-values {:a 1 :b 2} {:b 3 :c 4}))
+(expect {:a 1 :b 3} (replace-vals {:a 1 :b 2} {:b 3 :c 4}))
 
 (expect 10 (parse-long "10"))
 
 (expect 2.1 (parse-double "2.1"))
+
+(expect [1 2 3 :arg]
+        (larg :arg vector 1 2 3))

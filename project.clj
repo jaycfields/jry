@@ -1,7 +1,9 @@
-(defproject jry "1.0.12"
+(defproject jry "2.0.0"
   :description "general clojure functions"
   :jar-name "jry.jar"
+  :source-paths ["src/clojure"]
+  :test-paths ["test"]
   :dependencies [[org.clojure/clojure "1.3.0"]]
-  :dev-dependencies [[expectations "1.4.3"]
-                     [lein-expectations "0.0.1"]
-                     [lein-publishers "1.0.4"]])
+  :profiles {:dev {:dependencies [[expectations "1.4.36"]]}}
+  :plugins [[lein-expectations "0.0.7"]
+            [lein-publishers "1.0.4"]])

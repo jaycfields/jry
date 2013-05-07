@@ -1,4 +1,4 @@
-(ns jry.core
+(ns jry
   (:require clojure.data))
 
 (defn % [& args] (apply partial args))
@@ -23,11 +23,6 @@
 
 (defn p [& xs]
   (apply println (map pr-str xs)))
-
-(defmacro returning [[the-symbol v] & forms]
-  `(let [~the-symbol ~v]
-     ~@forms
-     ~the-symbol))
 
 (defmacro ^{:private true} assert-args [fnname & pairs]
   `(do (when-not ~(first pairs)
@@ -76,19 +71,13 @@
     {}
     (nth-vals* [] i m)))
 
-(defn update-values [m f & args]
+(defn update-vals [m f & args]
   (reduce (fn [r [k v]] (assoc r k (apply f v args))) {} m))
 
 (defn update-keys [m f & args]
   (reduce (fn [r [k v]] (assoc r (apply f k args) v)) {} m))
 
-(defn key-by [f coll]
-  (reduce (fn [r e] (assoc r (f e) e)) {} coll))
-
-(defn xrelify [m kk vk]
-  (map (fn [[k v]] (hash-map kk k vk v)) m))
-
-(defn replace-values [m replacements]
+(defn replace-vals [m replacements]
   (reduce
    (fn [r [k v]]
      (if (contains? r k)
