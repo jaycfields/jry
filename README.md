@@ -21,17 +21,17 @@ To build jry from source, run the following commands:
 ## Examples
 
 composing functions
-    
+
     ; % as a shorthand for partial
     ((% identity 1)) => 1
-    
+
 basic functions
 
     ; exclusive or
     (xor true false) => true
     (xor true true) => false
     (xor false false) => false
-    
+
     ; one? & two?
     (one? 1) => true
     (one? 3) => false
@@ -57,13 +57,13 @@ interop related functions
               :month .getMonth
               :year .getYear
               :day .getDate) => {:month 0 :year 2012 :day 31}
-              
+
     ; parse-double & parse-long are available, and helpful when used with high-order fns
     (parse-double "2.1") => 2.1
     (parse-long "2") => 2
 
 collections
-   
+
     ; every is like every?, but it returns the entire list if
     ; everything is truthy; else, nil
     (every identity [1 2 3]) => [1 2 3]
@@ -78,11 +78,11 @@ maps
 
     ; flatten-keys denormalizes keys.
     (flatten-keys {:a {:b 1 :e 3} :c {:d 2}}) => {[:a :b] 1 [:a :e] 3 [:c :d] 2}
-    (flatten-keys {:a {:z nil :b 1 :e {:f 4 :g 5}}}) => {[:a :z] nil [:a :b] 1 [:a :e :f] 4 [:a :e :g] 5} 
+    (flatten-keys {:a {:z nil :b 1 :e {:f 4 :g 5}}}) => {[:a :z] nil [:a :b] 1 [:a :e :f] 4 [:a :e :g] 5}
 
-    ; update-values applies a function (and any additional args) to
-    ; each value in a map. 
-    (update-values {:b {:c :d :e :f} :h {:c :d :e :f}} dissoc :c) => {:b {:e :f} :h {:e :f}}
+    ; update-vals applies a function (and any additional args) to
+    ; each value in a map.
+    (update-vals {:b {:c :d :e :f} :h {:c :d :e :f}} dissoc :c) => {:b {:e :f} :h {:e :f}}
 
     ; update-keys applies a function (and any additional args) to
     ; each key in a map.
@@ -92,19 +92,46 @@ maps
     (nth-vals 2 {1 {2 3} 4 {5 6}}) => [3 6]
     (nth-vals 2 {:a :a 1 {2 3} 4 {5 {6 7}}}) => [3 {6 7} :a]
 
-    ; key-by keys a new map from an xrel by applying a fn to each
-    ; element of an xrel
-    (key-by :a [{:a 1 :b 1} {:a 2 :b 2} {:a 3 :b 3}]) => {1 {:a 1 :b 1} 2 {:a 2 :b 2} 3 {:a 3 :b 3}}
-
-    ; xrelify converts a map into an xrel, mapping each k/v pair to a
-    ; k key and a v key
-    (xrelify {1 2 3 4} :x :y) => [{:x 1 :y 2} {:x 3 :y 4}]
-
     ; replace-values replaces the values of keys that exist in a map
     ; (and ignores any replacement values that have keys that do not
     ; exist in the original map)
-    (replace-values {:a 1 :b 2} {:b 3 :c 4}) => {:a 1 :b 3}
-    
+    (replace-vals {:a 1 :b 2} {:b 3 :c 4}) => {:a 1 :b 3}
+
+## jry.set Examples
+
+    ; rel->hash-map converts a rel to a hash-map. A key-fn is required, and
+    ; a val-fn can be optionally specified.
+    (rel->hash-map [{:id 1 :first-name "Jay" :last-name "Fields"}
+                {:id 2 :first-name "John" :last-name "Hume"}]
+               :id)
+    => {2 {:last-name "Hume", :first-name "John", :id 2},
+        1 {:last-name "Fields", :first-name "Jay", :id 1}}
+    (rel->hash-map [{:id 1 :first-name "Jay" :last-name "Fields"}
+                {:id 2 :first-name "John" :last-name "Hume"}]
+               :id :val-fn (comp (partial apply format "%s %s")
+                                 (juxt :first-name :last-name)))
+    => {2 "John Hume", 1 "Jay Fields"}
+
+    ; hash-map->rel converts a hash-map to a rel. You'll need to specify keys
+    ; that will be used for both the key and the value.
+    (hash-map->rel {2 "John Hume", 1 "Jay Fields"} :id :name)
+    => ({:name "Jay Fields", :id 1} {:name "John Hume", :id 2})
+
+    ; transform returns a rel of the maps in rel that have been transformed by
+    ; fns from the transform-fns map to the values of the specified keys.
+    (transform [{:num 1 :str "abc" :raw 'still-raw}
+                {:num 2 :str "xyz" :raw 'also-raw}]
+               {:num str :str keyword})
+    => ({:raw still-raw, :str :abc, :num "1"} {:raw also-raw, :str :xyz, :num "2"})
+
+    ; combine returns a map of the maps in rel, merge using the combine-fn for each
+    ; key specified in combine-fns, or using standard merge rules when no combine-fns
+    ; is specified
+    (combine [{:num 1 :str "abc" :raw 'still-raw}
+              {:num 2 :str "xyz" :raw 'also-raw}]
+             {:num + :str str})
+    => {:num 3, :str "abcxyz", :raw also-raw}
+
 ## License
 
 Copyright (c) 2010, Jay Fields
