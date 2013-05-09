@@ -11,7 +11,7 @@ The easiest way to use jry in your own projects is via
 [Leiningen](http://github.com/technomancy/leiningen). Add the
 following dependency to your project.clj file:
 
-    [jry "1.0.11"]
+    [jry "2.0.0"]
 
 To build jry from source, run the following commands:
 
