@@ -63,6 +63,3 @@
 (expect 10 (parse-long "10"))
 
 (expect 2.1 (parse-double "2.1"))
-
-(expect [1 2 3 :arg]
-        (larg :arg vector 1 2 3))
