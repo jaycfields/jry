@@ -1,13 +1,6 @@
 (ns jry
   (:require clojure.data))
 
-(defn % [& args] (apply partial args))
-
-(defn truthy? [x]
-  (if x true false))
-
-(def falsey? (complement truthy?))
-
 (defn xor [a b]
   (and (or a b) (not (and a b))))
 
@@ -90,3 +83,16 @@
 
 (defn one? [x] (= 1 x))
 (defn two? [x] (= 2 x))
+
+(defn k=
+  ([k v] (fn [m] (and (-> m k (= v)) m)))
+  ([k1 v1 k2 v2] (fn [m] (and (-> m k1 (= v1)) (-> m k2 (= v2)) m)))
+  ([k1 v1 k2 v2 & {:as kvs}] (fn [m]
+                               (and
+                                (-> m k1 (= v1))
+                                (-> m k2 (= v2))
+                                (= kvs (select-keys m (keys kvs)))
+                                m))))
+
+(defmacro kvify [& xs]
+  `(hash-map ~@(interleave (map keyword xs) xs)))

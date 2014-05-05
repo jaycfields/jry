@@ -1,21 +1,6 @@
 (ns expectations.jry-expectations
   (:use jry expectations))
 
-(expect fn? (% identity 1))
-(expect 1 ((% identity 1)))
-
-(expect true (truthy? "BRN"))
-(expect true (truthy? true))
-(expect true (truthy? 1))
-(expect false (truthy? nil))
-(expect false (truthy? false))
-
-(expect false (falsey? "BRN"))
-(expect false (falsey? true))
-(expect false (falsey? 1))
-(expect true (falsey? nil))
-(expect true (falsey? false))
-
 (expect one? 1)
 (expect two? 2)
 
@@ -63,3 +48,18 @@
 (expect 10 (parse-long "10"))
 
 (expect 2.1 (parse-double "2.1"))
+
+(expect {:x "x", :one 1} ((k= :one 1) {:one 1 :x "x"}))
+(expect false ((k= :one 1) {:one 2 :x "x"}))
+
+(expect {:x "x", :one 1, :two 2} ((k= :one 1 :two 2) {:one 1 :two 2 :x "x"}))
+(expect false ((k= :one 1 :two 2) {:one 2 :two 2 :x "x"}))
+(expect false ((k= :one 1 :two 2) {:one 1 :two 1 :x "x"}))
+
+(expect {:x "x", :one 1, :two 2, :thr 3} ((k= :one 1 :two 2 :thr 3) {:one 1 :two 2 :thr 3 :x "x"}))
+(expect false ((k= :one 1 :two 2 :thr 3) {:one 2 :two 2 :thr 3 :x "x"}))
+(expect false ((k= :one 1 :two 2 :thr 3) {:one 1 :two 1 :thr 3 :x "x"}))
+(expect false ((k= :one 1 :two 2 :thr 3) {:one 1 :two 2 :thr 1 :x "x"}))
+
+(expect '(clojure.core/hash-map :a a :b b)
+  (expanding (kvify a b)))
