@@ -50,6 +50,7 @@
 (expect 2.1 (parse-double "2.1"))
 
 (expect {:x "x", :one 1} ((k= :one 1) {:one 1 :x "x"}))
+(expect {"a" "aye!"} ((k= "a" "aye!") {"a" "aye!"}))
 (expect false ((k= :one 1) {:one 2 :x "x"}))
 
 (expect {:x "x", :one 1, :two 2} ((k= :one 1 :two 2) {:one 1 :two 2 :x "x"}))
