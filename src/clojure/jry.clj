@@ -85,12 +85,12 @@
 (defn two? [x] (= 2 x))
 
 (defn k=
-  ([k v] (fn [m] (and (-> m (get k) (= v)) m)))
-  ([k1 v1 k2 v2] (fn [m] (and (-> m (get k1) (= v1)) (-> m (get k2) (= v2)) m)))
+  ([k v] (fn [m] (and (= v (get m k)) m)))
+  ([k1 v1 k2 v2] (fn [m] (and (= v1 (get m k1)) (= v2 (get m k2)) m)))
   ([k1 v1 k2 v2 & {:as kvs}] (fn [m]
                                (and
-                                (-> m (get k1) (= v1))
-                                (-> m (get k2) (= v2))
+                                (= v1 (get m k1))
+                                (= v2 (get m k2))
                                 (= kvs (select-keys m (keys kvs)))
                                 m))))
 
