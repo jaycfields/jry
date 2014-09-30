@@ -1,4 +1,4 @@
-(defproject jry "5.1.1-SNAPSHOT"
+(defproject jry "5.1.1"
   :description "general clojure functions"
   :jar-name "jry.jar"
   :source-paths ["src/clojure"]
