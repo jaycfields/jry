@@ -9,7 +9,7 @@
 (defn list-files [path & {:keys [path-filter recursive] :or {path-filter #"" recursive false}}]
   (if recursive
     (loop [result []
-           [f & rest-files] (list-files* "./lyndon-prod" path-filter)]
+           [f & rest-files] (list-files* path path-filter)]
       (cond
        (nil? f) result
        (.isDirectory f) (recur result (concat rest-files (list-files* f path-filter)))
