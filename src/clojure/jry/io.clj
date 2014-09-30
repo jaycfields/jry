@@ -1,4 +1,4 @@
-(ns clojure.jry.io
+(ns jry.io
   (require clojure.java.io))
 
 (defn list-files [path & {:keys [path-filter] :or {path-filter #""}}]
