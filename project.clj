@@ -1,5 +1,7 @@
 (defproject jry "5.1.7-SNAPSHOT"
   :description "general clojure functions"
+  :url "https://github.com/jaycfields/jry/blob/master/README.md"
+  :license "https://github.com/jaycfields/jry/blob/master/README.md#license"
   :jar-name "jry.jar"
   :source-paths ["src/clojure"]
   :test-paths ["test"]
