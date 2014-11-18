@@ -95,4 +95,6 @@
                                 m))))
 
 (defmacro kvify [& xs]
-  `(hash-map ~@(interleave (map keyword xs) xs)))
+  (if (apply distinct? xs)
+    (zipmap (map keyword xs) xs)
+    (throw (RuntimeException. (str "duplicate keys to kvify: " xs)))))
