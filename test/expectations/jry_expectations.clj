@@ -62,5 +62,6 @@
 (expect false ((k= :one 1 :two 2 :thr 3) {:one 1 :two 1 :thr 3 :x "x"}))
 (expect false ((k= :one 1 :two 2 :thr 3) {:one 1 :two 2 :thr 1 :x "x"}))
 
-(expect '(clojure.core/hash-map :a a :b b)
+(expect '{:a a :b b}
   (expanding (kvify a b)))
+(expect RuntimeException (macroexpand-1 '(jry/kvify a a a a)))
