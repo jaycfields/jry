@@ -1,4 +1,4 @@
-(defproject jry "5.1.9-SNAPSHOT"
+(defproject jry "5.1.9"
   :description "general clojure functions"
   :url "https://github.com/jaycfields/jry/blob/master/README.md"
   :license "https://github.com/jaycfields/jry/blob/master/README.md#license"
