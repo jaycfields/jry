@@ -4,10 +4,11 @@
 (expect one? 1)
 (expect two? 2)
 
-(expect false (xor false false))
+(expect nil (xor false false))
 (expect true (xor false true))
 (expect true (xor true false))
-(expect false (xor true true))
+(expect nil (xor true true))
+(expect :yes (reduce xor [nil :yes false]))
 
 (expect [1 2 3] (every identity [1 2 3]))
 (expect nil (every identity [1 2 nil]))
@@ -31,23 +32,13 @@
 (expect {} (flatten-keys {}))
 (expect {} (flatten-keys nil))
 
-(expect {:b {:e :f} :h {:e :f}}
-  (update-vals {:b {:c :d :e :f} :h {:c :d :e :f}} dissoc :c))
-
-(expect {1 :a 2 :b}
-        (update-keys {2 :a 3 :b} - 1))
-
 (expect [3 6]
-  (nth-vals 2 {1 {2 3} 4 {5 6}}))
+  (sort (nth-vals 2 {1 {2 3} 4 {5 6}})))
 
-(expect [3 {6 7} :a]
-  (nth-vals 2 {:a :a 1 {2 3} 4 {5 {6 7}}}))
+(expect #{3 {6 7} :a}
+  (set (nth-vals 2 {:a :a 1 {2 3} 4 {5 {6 7}}})))
 
 (expect {:a 1 :b 3} (replace-vals {:a 1 :b 2} {:b 3 :c 4}))
-
-(expect 10 (parse-long "10"))
-
-(expect 2.1 (parse-double "2.1"))
 
 (expect {:x "x", :one 1} ((k= :one 1) {:one 1 :x "x"}))
 (expect {"a" "aye!"} ((k= "a" "aye!") {"a" "aye!"}))

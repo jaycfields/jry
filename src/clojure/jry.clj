@@ -1,8 +1,12 @@
 (ns jry
   (:require clojure.data))
 
-(defn xor [a b]
-  (and (or a b) (not (and a b))))
+(defn xor
+  [x y]
+  (if (and x (not y))
+    x
+    (when (and y (not x))
+      y)))
 
 (defn every [pred l]
   (when (every? pred l)
@@ -64,12 +68,6 @@
     {}
     (nth-vals* [] i m)))
 
-(defn update-vals [m f & args]
-  (reduce (fn [r [k v]] (assoc r k (apply f v args))) {} m))
-
-(defn update-keys [m f & args]
-  (reduce (fn [r [k v]] (assoc r (apply f k args) v)) {} m))
-
 (defn replace-vals [m replacements]
   (reduce
    (fn [r [k v]]
@@ -77,9 +75,6 @@
        (assoc r k v)
        r))
    m replacements))
-
-(def parse-double #(Double/parseDouble %))
-(def parse-long #(Long/parseLong %))
 
 (defn one? [x] (= 1 x))
 (defn two? [x] (= 2 x))
